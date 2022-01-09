@@ -11,16 +11,54 @@
         </div>
       </header>
       <section>
-          <div class="frame"></div>
-          <div class="frame"></div>
-          <div class="frame"></div>
+          <div 
+          class="frame"
+          v-bind:class="{ active: showName}"
+          @click="showName = !showName">
+          >
+            <img src="../assets/work/1.png" alt="">
+            <div v-bind:class="{ active: showName}">
+              <p>Sanrock Drone Website Redesign</p>
+              <a href="/sanrock">Visit Site</a>
+            </div>
+          </div>
+
+          <div 
+          class="frame"
+          v-bind:class="{ active: showName2}"
+          @click="showName2 = !showName2"
+          >
+            <img src="../assets/work/2.png" alt="">
+            <div v-bind:class="{ active: showName2}">
+              <p>Covid-19 Stats Website</p>
+              <a href="/covid_site">Visit Site</a>
+            </div>
+          </div>
+
+          <div
+          class="frame"
+          v-bind:class="{ active: showName3}"
+          @click="showName3 = !showName3"
+          >
+            <img src="../assets/work/3.png" alt="">
+            <div v-bind:class="{ active: showName3}">
+              <p>Graffiti Art Showcase Website</p>
+              <a href="/graf-art">Visit Site</a>
+            </div>
+          </div>
       </section>
   </div>
 </template>
 
 <script>
 export default {
-
+  data() {
+    return {  
+      showName: false,
+      showName2: false,
+      showName3: false
+    }
+  }
 }
 </script>
 
@@ -49,20 +87,53 @@ section{
     width: 350px;
     height: 500px;
     padding: 20px;
-    background: #efefef;
+    background: #ff4444;
     color: #121212;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+.frame>div{
+  display: none;
+  opacity: 0;
+  position: absolute;
+  inset: 0;
+  color: white;
+  background-color: rgba(0, 0, 0, .8);
+  text-align: center;
+}
+.frame>div.active{
+  display: block;
+  animation: fade 300ms ease-in-out forwards;
+}
+.frame>div>p{
+  margin-top: 60%;
+}
+.frame>img{
+  max-height: 1300px;
+  transform: rotateZ(10deg) scale(1.3);
+  width: 100%;
+}
+.frame>div>a{
+  display: block;
+  color: white;
+  text-decoration: none;
+  width: 50%;
+  margin-inline: auto;
+  margin-top: 1em;
+  padding: .5em;
+  border: 2px solid white;
+}
+.frame>div>a:hover{
+  color: #ff4444;
+  border-color: #ff4444;
 }
 .frame:hover{
-    transform: scale(1.1);
-}
-p{
-  font-size: 14px;
-  width: 200px;
-  margin: auto;
+    transform: scale(1.05);
 }
 @media screen and (max-width:1024px){
   section{
@@ -76,6 +147,9 @@ p{
     height: 450px;
     margin: 20px 0px;
     padding: 20px;
+  }
+  .frame>div>p{
+  margin-top: 30%;
   }
   header{
     margin: auto;
@@ -97,11 +171,18 @@ p{
     margin: 20px 0px;
     padding: 20px;
   }
+  .frame>div>p{
+  margin-top: 45%;
+  }
 }
 
 @media screen and (max-width:320px) {
   .frame{
     width: 280px;
   }
+}
+@keyframes fade {
+  from{opacity: 0;}
+  to{opacity: 1;}
 }
 </style>
